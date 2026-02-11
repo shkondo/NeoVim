@@ -12,7 +12,8 @@ vim.keymap.set('t', '<C-o>', '<C-\\><C-n>', { noremap = true, silent = true, des
 -- insert modeでhjklを使ってカーソル移動
 vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left" })                                                  -- インサートモード終了
 vim.keymap.set("i", "<C-j>", "<Down>", { desc = "Move down" })                                                  -- インサートモード終了
-vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move up" })                                                  -- インサートモード終了
+-- 上方向の移動が効かない。要原因究明
+vim.keymap.set("i", "<C-k>", "<Up>", { noremap = true, desc = "Move up" })                                                  -- インサートモード終了
 vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move right" })                                                  -- インサートモード終了
 
 -- vim.keymap.set('v', '<C-c>', '"+y', { noremap = true, silent = true, desc = 'Copy to clipboard (Ctrl+C)' })                                                 -- Ctrl + C でコピー
