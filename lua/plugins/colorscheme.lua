@@ -1,9 +1,15 @@
 return {
 {
-  "wadackel/vim-dogrun",
+  "catppuccin/nvim",
+  name = "catppuccin",
   priority = 1000,
-  config = function()
-    vim.cmd("colorscheme dogrun")
+  opts = {
+    flavour = "mocha",
+    transparent_background = true,
+  },
+  config = function(_, opts)
+    require("catppuccin").setup(opts)
+    vim.cmd("colorscheme catppuccin")
 
     -- カラースキーム適用後にカーソルの設定を追加
     vim.opt.guicursor = "n-v-c:block-Cursor/lCursor"
@@ -16,7 +22,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "dogrun",
+      colorscheme = "catppuccin",
     },
   },
 }

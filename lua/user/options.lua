@@ -10,10 +10,10 @@ vim.api.nvim_command('highlight LineNr guibg=NONE ctermbg=NONE')
 vim.api.nvim_command('highlight Folded guibg=NONE ctermbg=NONE')
 vim.api.nvim_command('highlight EndOfBuffer guibg=NONE ctermbg=NONE')
 
--- colorscheme.luaでのDracula設定
-vim.cmd('colorscheme dracula')
+-- colorscheme適用
+vim.cmd('colorscheme catppuccin')
 
--- Draculaの設定後に透明化を適用（カラースキームが上書きする可能性があるため）
+-- カラースキーム設定後に透明化を適用（カラースキームが上書きする可能性があるため）
 vim.api.nvim_command('highlight Normal guibg=NONE ctermbg=NONE')
 vim.api.nvim_command('highlight SignColumn guibg=NONE ctermbg=NONE')
 vim.api.nvim_command('highlight NormalNC guibg=NONE ctermbg=NONE')
