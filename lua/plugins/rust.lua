@@ -1,34 +1,25 @@
 return {
   {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
-    dependencies = "neovim/nvim-lspconfig",
-    opts = function()
-      return {
-        tools = {
-          runnables = {
-            use_telescope = true,
-          },
-          inlay_hints = {
-            auto = true,
-            show_parameter_hints = true,
-          },
-        },
+    "mrcjkb/rustaceanvim",
+    version = "^8",
+    lazy = false,
+    init = function()
+      vim.g.rustaceanvim = {
         server = {
           on_attach = function(_, bufnr)
-            -- カーゴコマンド用のキーマッピング
-            vim.keymap.set("n", "<leader>rr", "<cmd>RustRunnables<cr>", { buffer = bufnr, desc = "Runnables" })
-            vim.keymap.set("n", "<leader>rt", "<cmd>RustDebuggables<cr>", { buffer = bufnr, desc = "Debuggables" })
-            vim.keymap.set("n", "<leader>re", "<cmd>RustExpandMacro<cr>", { buffer = bufnr, desc = "Expand Macro" })
-            vim.keymap.set("n", "<leader>rc", "<cmd>RustOpenCargo<cr>", { buffer = bufnr, desc = "Open Cargo.toml" })
+            vim.keymap.set("n", "<leader>rr", function() vim.cmd.RustLsp("runnables") end, { buffer = bufnr, desc = "Runnables" })
+            vim.keymap.set("n", "<leader>rt", function() vim.cmd.RustLsp("debuggables") end, { buffer = bufnr, desc = "Debuggables" })
+            vim.keymap.set("n", "<leader>re", function() vim.cmd.RustLsp("expandMacro") end, { buffer = bufnr, desc = "Expand Macro" })
+            vim.keymap.set("n", "<leader>rc", function() vim.cmd.RustLsp("openCargo") end, { buffer = bufnr, desc = "Open Cargo.toml" })
           end,
-          settings = {
+          default_settings = {
             ["rust-analyzer"] = {
-              checkOnSave = {
-                command = "clippy",
+              checkOnSave = true,
+              check = {
+                command = "check",
               },
               cargo = {
-                allFeatures = true,
+                allFeatures = false,
               },
               procMacro = {
                 enable = true,
@@ -37,9 +28,6 @@ return {
           },
         },
       }
-    end,
-    config = function(_, opts)
-      require("rust-tools").setup(opts)
     end,
   },
   {

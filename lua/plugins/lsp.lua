@@ -5,8 +5,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
     -- completion
     if client:supports_method('textDocument/completion') then
-      local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
-      client.server_capabilities.completionProvider.triggerCharacters = chars
+      -- rust-analyzer is too heavy for aggressive completion triggers;
+      -- use its default trigger characters instead.
+      if client.name ~= 'rust_analyzer' then
+        local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
+        client.server_capabilities.completionProvider.triggerCharacters = chars
+      end
       vim.lsp.completion.enable(true, client.id, args.buf, {
         autotrigger = true,
       })
